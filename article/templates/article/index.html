@@ -1,0 +1,22 @@
+{% extends "article/_base.html" %}
+{% if form.error %}
+    {{ form.error }}
+{% endif %}
+
+{% block content %}
+
+<form method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" />
+</form>
+
+{%  if articles %}
+    {% for article in articles %}
+        <ul>
+        <li><a href="{% url 'article' article.pk %}">{{ article|truncatechars:30 }}</a></li>
+        </ul>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
